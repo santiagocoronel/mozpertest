@@ -5,8 +5,6 @@ plugins {
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
-    id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -58,6 +56,9 @@ dependencies {
     //Base Android
     implementation 'com.github.santiagocoronel:base-android:1.0.2'
 
+    //Androidx LifeCycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
     //Test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -79,7 +80,6 @@ dependencies {
 
     //Circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.0.1'
-    implementation 'me.relex:circleindicator:2.1.4'
 
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
@@ -92,10 +92,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     //Koin Injection
-    implementation "org.koin:koin-android:2.1.6"
-    implementation "org.koin:koin-androidx-viewmodel:2.1.6"
-    implementation "org.koin:koin-core:2.1.6"
-    implementation "org.koin:koin-test:2.1.6"
+    implementation "io.insert-koin:koin-android:3.2.0"
+    implementation "io.insert-koin:koin-test:3.2.0"
+    implementation "io.insert-koin:koin-test-junit4:3.2.0"
 
     //EventBus
     implementation "org.greenrobot:eventbus:3.2.0"
@@ -111,5 +110,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-analytics'
 
+    //Room
+    implementation "androidx.room:room-ktx:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
 
 }
