@@ -8,6 +8,8 @@ import com.santiagocoronel.mozpertest.features.employees.domain.model.DataResult
 import com.santiagocoronel.mozpertest.features.employees.domain.model.DataSourceType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.single
+import kotlinx.coroutines.flow.take
 import java.net.UnknownHostException
 
 class GetEmployeesUseCase(
@@ -24,7 +26,7 @@ class GetEmployeesUseCase(
                 }
                 is Response.Failure<Exception> -> {
                     if (response.error is UnknownHostException) {
-                        database.employeeDao().getAll().collect { localData ->
+                        database.employeeDao().getAll().take(1).collect { localData ->
                             emit(DataResult(localData, DataSourceType.LOCAL))
                         }
                     } else {

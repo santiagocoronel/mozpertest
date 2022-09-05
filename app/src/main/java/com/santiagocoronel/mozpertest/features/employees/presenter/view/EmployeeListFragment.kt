@@ -28,10 +28,20 @@ class EmployeeListFragment : BaseFragment<FragmentEmployeeListBinding, BaseActiv
     override fun getViewModel(): BaseViewModel = viewModel
 
     override fun init() {
-        viewModel.getEmployees()
 
-        adapter = EmployeeAdapter(context = requireContext(), onClickItem = ::onClickItem)
+        if (!::adapter.isInitialized){
+            adapter = EmployeeAdapter(context = requireContext(), onClickItem = ::onClickItem)
+        }
         binding.recyclerView.adapter = adapter
+
+        if (adapter.itemCount == 0){
+            viewModel.getEmployees()
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            viewModel.getEmployees()
+        }
 
         binding.buttonCloseSession.setOnClickListener {
             closeSession()
@@ -80,8 +90,8 @@ class EmployeeListFragment : BaseFragment<FragmentEmployeeListBinding, BaseActiv
             adapter.addAll(employeesList)
             adapter.notifyDataSetChanged()
         }
-        viewModel.offlineModeLD.observe(this){
-           it?.let {
+        viewModel.offlineModeLD.observe(this){ event ->
+            event?.let {
                if (!it.hasBeenHandled){
                    Snackbar.make(requireView(), getString(R.string.you_are_offline), Snackbar.LENGTH_LONG).show()
                }

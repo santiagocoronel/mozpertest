@@ -17,7 +17,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            Thread.sleep(5000)
+            Thread.sleep(2500)
 
             if (PreferencesManager.getInstance().getKey(KEY_LOGGED) == "true"){
                 val intent = Intent(this@SplashActivity, HomeActivity::class.java)
