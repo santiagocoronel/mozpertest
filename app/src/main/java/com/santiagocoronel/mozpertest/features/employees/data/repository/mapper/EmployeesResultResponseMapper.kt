@@ -1,7 +1,7 @@
-package com.santiagocoronel.mozpertest.features.home.data.repository.mapper
+package com.santiagocoronel.mozpertest.features.employees.data.repository.mapper
 
-import com.santiagocoronel.mozpertest.features.home.data.repository.local.db.tables.EmployeeEntity
-import com.santiagocoronel.mozpertest.features.home.data.repository.network.dto.response.EmployeeResponse
+import com.santiagocoronel.mozpertest.features.employees.data.repository.local.db.tables.EmployeeEntity
+import com.santiagocoronel.mozpertest.features.employees.data.repository.network.dto.response.EmployeeResponse
 
 object EmployeesResultResponseMapper {
 

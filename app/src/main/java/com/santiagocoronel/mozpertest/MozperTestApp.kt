@@ -1,13 +1,10 @@
 package com.santiagocoronel.mozpertest
 
 import android.app.Application
-import android.util.Log
-import androidx.room.Room
-import com.google.android.gms.tasks.OnCompleteListener
+import androidx.appcompat.app.AppCompatDelegate
 
-import com.google.firebase.messaging.FirebaseMessaging
-import com.santiagocoronel.mozpertest.features.home.data.repository.local.db.MozperDataBase
 import com.santiagocoronel.mozpertest.network.networkModule
+import com.santiagocoronel.mozpertest.preference.PreferencesManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -19,6 +16,10 @@ class MozperTestApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        PreferencesManager.initialize(this)
 
         startKoin {
             androidLogger(Level.INFO)

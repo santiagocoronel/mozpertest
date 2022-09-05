@@ -1,11 +1,10 @@
-package com.santiagocoronel.mozpertest.features.home.data.repository.local.db.dao
+package com.santiagocoronel.mozpertest.features.employees.data.repository.local.db.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import com.santiagocoronel.mozpertest.features.home.data.repository.local.db.tables.EmployeeEntity
+import com.santiagocoronel.mozpertest.features.employees.data.repository.local.db.tables.EmployeeEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

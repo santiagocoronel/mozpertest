@@ -2,12 +2,12 @@ package com.santiagocoronel.mozpertest
 
 import android.content.Context
 import androidx.room.Room
-import com.santiagocoronel.mozpertest.features.home.data.repository.EmployeeRepositoryImpl
-import com.santiagocoronel.mozpertest.features.home.data.repository.local.db.MozperDataBase
-import com.santiagocoronel.mozpertest.features.home.data.repository.network.MozperTestApi
-import com.santiagocoronel.mozpertest.features.home.domain.EmployeeRepository
-import com.santiagocoronel.mozpertest.features.home.domain.GetEmployeesUseCase
-import com.santiagocoronel.mozpertest.features.home.presenter.view.HomeViewModel
+import com.santiagocoronel.mozpertest.features.employees.data.repository.EmployeeRepositoryImpl
+import com.santiagocoronel.mozpertest.features.employees.data.repository.local.db.MozperDataBase
+import com.santiagocoronel.mozpertest.features.employees.data.repository.network.MozperTestApi
+import com.santiagocoronel.mozpertest.features.employees.domain.EmployeeRepository
+import com.santiagocoronel.mozpertest.features.employees.domain.GetEmployeesUseCase
+import com.santiagocoronel.mozpertest.features.employees.presenter.viewmodel.EmployeeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -19,7 +19,7 @@ val mozperTestModule: Module = module {
     single { provideMozperTestDataBase(get()) }
 
     //viewmodel
-    viewModel { HomeViewModel(get()) }
+    viewModel { EmployeeViewModel(get()) }
 
     //usecase
     single { provideGetEmployeesUseCase(get(), get()) }

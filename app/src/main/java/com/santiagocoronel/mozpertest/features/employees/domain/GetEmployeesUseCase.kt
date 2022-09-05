@@ -1,35 +1,31 @@
-package com.santiagocoronel.mozpertest.features.home.domain
+package com.santiagocoronel.mozpertest.features.employees.domain
 
-import androidx.lifecycle.Observer
 import com.santiagocoronel.androidbase.data.Response
 import com.santiagocoronel.androidbase.domain.BaseUseCase
-import com.santiagocoronel.androidbase.exception.NoInternetException
-import com.santiagocoronel.mozpertest.features.home.data.repository.local.db.MozperDataBase
-import com.santiagocoronel.mozpertest.features.home.data.repository.local.db.tables.EmployeeEntity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import com.santiagocoronel.mozpertest.features.employees.data.repository.local.db.MozperDataBase
+import com.santiagocoronel.mozpertest.features.employees.data.repository.local.db.tables.EmployeeEntity
+import com.santiagocoronel.mozpertest.features.employees.domain.model.DataResult
+import com.santiagocoronel.mozpertest.features.employees.domain.model.DataSourceType
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
 class GetEmployeesUseCase(
     private val repository: EmployeeRepository,
     private val database: MozperDataBase
-) : BaseUseCase<Flow<List<EmployeeEntity>>>() {
+) : BaseUseCase<Flow<DataResult>>() {
 
-    override suspend fun execute(): Flow<List<EmployeeEntity>> = flow {
+    override suspend fun execute(): Flow<DataResult> = flow {
         repository.getAll().collect { response ->
             when (response) {
                 is Response.Success -> {
                     database.employeeDao().insert(response.data)
-                    emit(response.data)
+                    emit(DataResult(response.data, DataSourceType.NETWORK))
                 }
                 is Response.Failure<Exception> -> {
                     if (response.error is UnknownHostException) {
                         database.employeeDao().getAll().collect { localData ->
-                            emit(localData)
+                            emit(DataResult(localData, DataSourceType.LOCAL))
                         }
                     } else {
                         throw response.error

@@ -1,11 +1,11 @@
-package com.santiagocoronel.mozpertest.features.home.data.repository
+package com.santiagocoronel.mozpertest.features.employees.data.repository
 
 import com.santiagocoronel.androidbase.data.BaseRepository
 import com.santiagocoronel.androidbase.data.Response
-import com.santiagocoronel.mozpertest.features.home.data.repository.local.db.tables.EmployeeEntity
-import com.santiagocoronel.mozpertest.features.home.data.repository.mapper.EmployeesResultResponseMapper
-import com.santiagocoronel.mozpertest.features.home.data.repository.network.MozperTestApi
-import com.santiagocoronel.mozpertest.features.home.domain.EmployeeRepository
+import com.santiagocoronel.mozpertest.features.employees.data.repository.local.db.tables.EmployeeEntity
+import com.santiagocoronel.mozpertest.features.employees.data.repository.mapper.EmployeesResultResponseMapper
+import com.santiagocoronel.mozpertest.features.employees.data.repository.network.MozperTestApi
+import com.santiagocoronel.mozpertest.features.employees.domain.EmployeeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow

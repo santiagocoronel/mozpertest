@@ -1,4 +1,4 @@
-package com.santiagocoronel.mozpertest.features.home.data.repository.network.dto.response
+package com.santiagocoronel.mozpertest.features.employees.data.repository.network.dto.response
 
 
 import com.google.gson.annotations.SerializedName
