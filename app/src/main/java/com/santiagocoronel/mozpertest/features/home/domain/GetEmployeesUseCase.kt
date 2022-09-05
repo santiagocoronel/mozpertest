@@ -9,8 +9,10 @@ import com.santiagocoronel.mozpertest.features.home.data.repository.local.db.tab
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 
 class GetEmployeesUseCase(
     private val repository: EmployeeRepository,
@@ -18,23 +20,19 @@ class GetEmployeesUseCase(
 ) : BaseUseCase<Flow<List<EmployeeEntity>>>() {
 
     override suspend fun execute(): Flow<List<EmployeeEntity>> = flow {
-
         repository.getAll().collect { response ->
             when (response) {
                 is Response.Success -> {
+                    database.employeeDao().insert(response.data)
                     emit(response.data)
-                    //need refresh local data.
                 }
                 is Response.Failure<Exception> -> {
-                    if (response.error is NoInternetException) {
-                        //return local data
-                        GlobalScope.launch(Dispatchers.IO) {
-                            database.employeeDao().getAll().value?.let { localData ->
-                                emit(localData)
-                            }
+                    if (response.error is UnknownHostException) {
+                        database.employeeDao().getAll().collect { localData ->
+                            emit(localData)
                         }
                     } else {
-
+                        throw response.error
                     }
                 }
             }
