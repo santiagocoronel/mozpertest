@@ -2,7 +2,7 @@
 
 Hello, this is a repository of an android aplication to show an employee list. (it's a challenge).
 
-This application was make this diferents tecnologies and technicles:
+This application was make with diferents tecnologies and technicles:
 
 Android Native.
 MVVM Architecture.
