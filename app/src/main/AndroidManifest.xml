@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.santiagocoronel.mozpertest">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MozperTestApp"
         android:allowBackup="true"

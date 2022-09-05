@@ -3,13 +3,17 @@ package com.santiagocoronel.mozpertest.features.home.data.repository.local.db.da
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import com.santiagocoronel.mozpertest.features.home.data.repository.local.db.tables.EmployeeEntity
 
 @Dao
 interface EmployeeEntityDao {
 
     @Query("SELECT id, description, firstName, image, lastName, rating FROM EmployeeEntity")
-    suspend fun getAll(): LiveData<List<EmployeeEntity>>
+    fun getAll(): LiveData<List<EmployeeEntity>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(list: List<EmployeeEntity>)
 
 }
